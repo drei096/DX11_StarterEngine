@@ -1,6 +1,6 @@
 #include "Application.h"
 
-Application::Application() : wnd(1024,768, L"Starter Game Engine")
+Application::Application() : wnd(1280,720, L"Starter Game Engine")
 {
 
 }
@@ -32,7 +32,7 @@ void Application::Update()
 	wnd.GetGrapx().ClearBuffer(c, c, 1.0f);
 
 	//draw here
-	wnd.GetGrapx().DrawTestTriangle();
+	wnd.GetGrapx().DrawTestTriangle(Timer.Peek(), wnd.mouse.GetPosX() / 400.0f - 1.0f, -wnd.mouse.GetPosY() / 300.0f + 1.0f);
 
 	//end frame
 	wnd.GetGrapx().EndFrame();
