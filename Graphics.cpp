@@ -121,12 +121,23 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 	// create index buffer
 	const unsigned short indices[] =
 	{
-		0,2,1, 2,3,1,
-		1,3,5, 3,7,5,
-		2,6,3, 3,6,7,
-		4,5,7, 4,7,6,
-		0,4,2, 2,4,6,
-		0,1,4, 1,5,4
+		0,2,1, // -x
+		1,2,3,
+
+		4,5,6, // +x
+		5,7,6,
+
+		0,1,5, // -y
+		0,5,4,
+
+		2,6,7, // +y
+		2,7,3,
+
+		0,4,6, // -z
+		0,6,2,
+
+		1,3,7, // +z
+		1,7,5,
 	};
 	wrl::ComPtr<ID3D11Buffer> pIndexBuffer;
 	D3D11_BUFFER_DESC ibd = {};
@@ -153,9 +164,9 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 	{
 		{
 			dx::XMMatrixTranspose(
-				dx::XMMatrixRotationZ(angle) *
-				dx::XMMatrixTranslation(x,y,0.0f) *
-				dx::XMMatrixPerspectiveLH(1.0f, 1.0f, 0.05f, 1.0f)
+				dx::XMMatrixRotationY(angle) *
+				dx::XMMatrixTranslation(x,y,-5.0f) *
+				dx::XMMatrixPerspectiveFovRH( 80.0f * (3.14f / 180.0f), 720.0f / 1280.0f, 0.1f, 100.0f)
 			)
 		}
 	};
